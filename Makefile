@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=gnu17 -ggdb -Wall -Werror -Wpedantic
+CFLAGS=-std=gnu17 -ggdb -Wall -Werror -Wpedantic -Iinclude
 LIBS=-lm -lSDL2
 
 SRC=$(wildcard src/*.c)
@@ -17,6 +17,11 @@ example: main.c lib
 	
 obj/src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
+
+install: lib
+	mv lib/libras.a /usr/lib
+	mkdir /usr/include/libras
+	cp include/* /usr/include/libras
 
 clean:
 	-rm -rf obj lib a.out
