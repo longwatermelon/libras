@@ -1,9 +1,19 @@
 #include "ras.h"
 #include <stdio.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 
-void print(const char *s)
+void ras_init_sdl()
 {
-    puts(s);
+    SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
+}
+
+
+void ras_quit_sdl()
+{
+    TTF_Quit();
+    SDL_Quit();
 }
 

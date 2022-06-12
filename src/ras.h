@@ -1,7 +1,10 @@
 #ifndef RAS_H
 #define RAS_H
 
-void print(const char *s);
+#include <SDL2/SDL.h>
+
+void ras_init_sdl();
+void ras_quit_sdl();
 
 #endif
 

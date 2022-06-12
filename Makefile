@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-std=gnu17 -ggdb -Wall -Werror -Wpedantic
-LIBS=-lm -lSDL2
+LIBS=-lm -lSDL2 -lSDL2_ttf
 
 SRC=$(wildcard src/*.c)
 OBJS=$(addprefix obj/, $(SRC:.c=.o))
@@ -17,4 +17,7 @@ example: main.c lib
 	
 obj/src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
+
+clean:
+	-rm -rf obj lib a.out
 
