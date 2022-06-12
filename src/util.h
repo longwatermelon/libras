@@ -6,7 +6,6 @@
 #include <time.h>
 #include <sys/types.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 
 float util_tri_area(Vec3f points[3]);
 

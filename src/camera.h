@@ -15,5 +15,7 @@ void cam_free(struct Camera *c);
 void cam_apply_eff(struct Camera *c);
 void cam_reverse_eff(struct Camera *c);
 
+void cam_move_angle(struct Camera *c, Vec3f dir);
+
 #endif
 

@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "render.h"
 #include <stdlib.h>
 
 
@@ -31,5 +32,12 @@ void cam_reverse_eff(struct Camera *c)
 {
     c->pos = vec_sub(c->pos, c->pos_eff);
     c->angle = vec_sub(c->angle, c->angle_eff);
+}
+
+
+void cam_move_angle(struct Camera *c, Vec3f dir)
+{
+    dir = render_rotate_cc(dir, c->angle);
+    c->pos = vec_addv(c->pos, dir);
 }
 

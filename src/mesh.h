@@ -39,7 +39,7 @@ void mesh_free(struct Mesh *m);
 
 void mesh_read(struct Mesh *m, const char *fp);
 
-void mesh_render(struct Mesh *m, RenderInfo *ri, struct Camera *c);
+void mesh_render(struct Mesh *m, RenderInfo *ri);
 
 void mesh_rotate(struct Mesh *m, Vec3f angle);
 

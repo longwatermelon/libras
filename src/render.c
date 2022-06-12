@@ -86,19 +86,6 @@ Vec3f render_rotate_cc(Vec3f p, Vec3f angle)
 }
 
 
-SDL_Texture *render_text(SDL_Renderer *rend, TTF_Font *font, const char *s)
-{
-    if (strlen(s) == 0)
-        return 0;
-
-    SDL_Surface *surf = TTF_RenderText_Blended(font, s, (SDL_Color){ 255, 255, 255 });
-    SDL_Texture *tex = SDL_CreateTextureFromSurface(rend, surf);
-
-    SDL_FreeSurface(surf);
-    return tex;
-}
-
-
 void render_filled_tri(SDL_Point p[3], float z[3], uint32_t *screen, float *zbuf, SDL_Color col)
 {
     SDL_Point p0 = p[0], p1 = p[1], p2 = p[2];

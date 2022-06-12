@@ -121,7 +121,7 @@ void mesh_read(struct Mesh *m, const char *fp)
 }
 
 
-void mesh_render(struct Mesh *m, RenderInfo *ri, struct Camera *c)
+void mesh_render(struct Mesh *m, RenderInfo *ri)
 {
     for (size_t i = 0; i < m->ntris; ++i)
     {
@@ -133,14 +133,14 @@ void mesh_render(struct Mesh *m, RenderInfo *ri, struct Camera *c)
 
         Vec3f norm = m->norms[m->tris[i].nidx];
 
-        float tri_dist = vec_len(vec_sub(c->pos, mpts[0]));
+        float tri_dist = vec_len(vec_sub(ri->cam->pos, mpts[0]));
         if (tri_dist > 100.f)
             continue;
 
         if (m->bculling)
         {
             Vec3f v = mpts[0];
-            Vec3f vp = vec_normalize(vec_sub(v, c->pos));
+            Vec3f vp = vec_normalize(vec_sub(v, ri->cam->pos));
 
             if (vec_dot(vp, norm) >= 0.f)
                 continue;
@@ -154,8 +154,8 @@ void mesh_render(struct Mesh *m, RenderInfo *ri, struct Camera *c)
         for (int j = 0; j < 3; ++j)
         {
             Vec3f p = mpts[j];
-            p = vec_sub(p, c->pos);
-            p = render_rotate_ccw(p, c->angle);
+            p = vec_sub(p, ri->cam->pos);
+            p = render_rotate_ccw(p, ri->cam->angle);
             zvals[j] = p.z;
 
             if (p.z < .5f)
@@ -179,7 +179,7 @@ void mesh_render(struct Mesh *m, RenderInfo *ri, struct Camera *c)
                     continue;
 
                 float b = fmin(ri->lights[i]->in / (.005f * tri_dist * tri_dist), ri->lights[i]->in);
-                Vec3f l = vec_normalize(vec_sub(c->pos, mpts[0]));
+                Vec3f l = vec_normalize(vec_sub(ri->cam->pos, mpts[0]));
                 dlight += b * fmax(0.f, vec_dot(l, norm));
 
                 if (dlight == 0.f)
